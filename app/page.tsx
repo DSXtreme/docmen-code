@@ -1,95 +1,41 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
+/** @jsxImportSource @emotion/react */
+
+import { useEffect, useLayoutEffect } from "react"
+import Markdown from "react-markdown"
+import hljs from "highlight.js"
+import "highlight.js/styles/github.css" // You can choose any theme you like
+
+type CodeProp = {
+    children: string
+}
+
+const markdown =
+    '## User Model with Mongoose\n\nThis code defines a Mongoose model for a "User" document in a MongoDB database.\n\n**1. Import necessary modules:**\n\n```javascript\nimport mongoose, { Schema, Types } from "mongoose";\n```\n\n**2. Define the raw document interface:**\n\n```javascript\ninterface UserType {\n    name: string;\n    email: string;\n    password: string;\n    projects: Types.ObjectId;\n}\n```\n\nThis interface defines the data types of the fields in the "User" document. It uses primitive types like `string` and `Types.ObjectId` for fields that will be directly stored in MongoDB. \n\n**3. Define the Mongoose schema:**\n\n```javascript\nconst userSchema = new Schema<UserType>({\n    name: { type: String, required: true },\n    email: { type: String, required: true },\n    password: {\n        type: String,\n        required: true,\n    },\n    projects: [\n        {\n            type: Schema.Types.ObjectId,\n            ref: "projects",\n        },\n    ],\n});\n```\n\nThis schema defines the structure of the "User" document. It specifies the type of each field, any validation rules (like `required`), and relationships to other models. In this case, the `projects` field is an array of `Types.ObjectId` references to documents in the "projects" collection.\n\n**4. Create the Mongoose model:**\n\n```javascript\nconst User = mongoose.model("users", userSchema);\n```\n\nThis line creates a Mongoose model called "User" based on the `userSchema`. This model provides methods for interacting with the database, such as creating, reading, updating, and deleting documents.\n\n **5. Export the model:**\n\n```javascript\nexport default User;\n```\n\nThis line makes the "User" model available for use in other parts of the application.\n\n**Key points:**\n\n- The model defines the structure and validation rules for "User" documents.\n- It uses `Types.ObjectId` to establish relationships with other models, like "projects".\n- The model provides methods for interacting with the database.\n\n**Further improvements:**\n\n- Add validation rules for email and password fields.\n- Consider using a password hashing library to secure passwords.\n- Implement additional features like user authentication and authorization.\n'
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
+    
+  useEffect(() => {
+        hljs.highlightAll()
+    }, [])
+
+
+    return (
         <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+            <textarea />
+            <Markdown
+                children={markdown}
+                components={{
+                    code({ children, className }) {
+                        console.log(className)
+                        return (
+                            <code className={"language-javascript"}>
+                                {children}
+                            </code>
+                        )
+                    },
+                }}
             />
-          </a>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+    )
 }
