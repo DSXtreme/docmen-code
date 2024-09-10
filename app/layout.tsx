@@ -3,7 +3,7 @@ import { Inter, Montserrat  } from "next/font/google"
 import "./globals.css"
 
 // Layout
-import Layout from "./components/Layout"
+import Layout from "../components/Layout"
 
 const montsarrat = Montserrat({ subsets: ["latin"] })
 

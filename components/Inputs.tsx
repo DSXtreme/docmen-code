@@ -84,7 +84,7 @@ export const TextArea: FC<InputProps> = ({
 }) => {
     return (
         <div style={{ width: style?.width ? style?.width :"100%",}}>
-            <label htmlFor={label}>{label}</label>
+            {label && <label htmlFor={label}>{label}</label>}
             <textarea
                 className={montsarrat.className}
                 id={label}
@@ -137,4 +137,5 @@ const input: SerializedStyles = css`
     font-size: 1rem;
     padding: 1rem;
     border-radius: .5rem;
+    resize: none;
 `

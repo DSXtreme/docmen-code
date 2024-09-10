@@ -1,33 +1,33 @@
-"use client"
+"use client";
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react"
+import { css } from "@emotion/react";
 
 type LayoutProps = {
-    children: React.ReactNode
-}
+    children: React.ReactNode;
+};
 
 const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
     return (
         <div css={layout_container}>
-            <nav>
-
-            </nav>
+            <nav></nav>
             <main>{children}</main>
         </div>
-    )
-}
+    );
+};
 
-export default Layout
+export default Layout;
 
 const layout_container = css`
-    main {
-        width: 100%;
-        max-width: 1536px;
-        min-height: 100vh;
-    }
-    nav{
+    nav {
         width: 100%;
         height: 45px;
-        background: var(--color-surface-200)
+        background: var(--color-surface-200);
+        position: fixed;
+        top: 0;
+        left: 0;
     }
-`
+    main {
+        width: 100%;
+        margin-top: 45px;
+    }
+`;
