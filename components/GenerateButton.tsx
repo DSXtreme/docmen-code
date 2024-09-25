@@ -3,6 +3,7 @@
 import { css, SerializedStyles } from "@emotion/react";
 import GenerateIcon from "./Icons/GenerateIcon";
 import { FC } from "react";
+import {motion} from "framer-motion"
 
 
 type Prop = {
@@ -11,9 +12,17 @@ type Prop = {
 
 const GenerateButton:FC<Prop> = ({onClick=()=>{}}) => {
   return (
-    <div css={container} onClick={() => onClick()}>
+    <motion.div 
+      css={container} 
+      onClick={() => onClick()}
+      whileHover={{
+        boxShadow: "-2px 5px 16px -5px #5DC4CA",
+        scale: 1.01,
+        cursor:"pointer"
+      }}
+    >
       <GenerateIcon width={22} style={{fill: "#565555fff"}} /> 
-    </div>
+    </motion.div>
   )
 }
 

@@ -18,6 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
 export default Layout;
 
 const layout_container = css`
+    min-width: 600px;
     nav {
         width: 100%;
         height: 45px;
