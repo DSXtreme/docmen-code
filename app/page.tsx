@@ -43,6 +43,7 @@ export default function Home() {
 
     const hadelGenerate = async () => {
         if (input) {
+            console.log("generating...");
             // const res = await axios.post(
             //     "http://localhost:3001/document/generate",
             //     {
@@ -52,9 +53,11 @@ export default function Home() {
             // console.log("res: ", res);
             // setMarkdown(res.data.markdown_data);
 
-            const res = await getDocumentAPI({markdownInput: input})
+            const res = await getDocumentAPI({ markdownInput: input });
 
-            const data = res.data
+            const data = res.data;
+
+            setMarkdown(data.markdown_data);
         }
     };
 
@@ -79,13 +82,14 @@ export default function Home() {
                     <Loading />
                 </div> */}
                     <Markdown
-                        children={markdown}
                         components={{
                             code({ children }) {
                                 return <code css={code_block}>{children}</code>;
                             },
                         }}
-                    />
+                    >
+                        {markdown}
+                    </Markdown>
                 </div>
             </div>
         )

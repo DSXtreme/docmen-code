@@ -5,26 +5,21 @@ type Parameters = {
     markdownInput: string;
 };
 
-type Response = {
-    data: string;
-};
-
 const getDocumentAPI = async ({
     markdownInput,
-}: Parameters): Promise<Response > => {
+}: Parameters) => {
     console.log("generating");
 
-    const res = await axiosPost({
+    const res = await axiosPost<AxiosResponse>({
         url: `${process.env.NEXT_PUBLIC_API_URL}/document/generate`,
-        data: markdownInput,
+        data: {code: markdownInput},
     });
 
     // Check if the result is an AxiosError
-
+    console.log("data from getDocumentAPI", res)
 
     // If it's a successful response, return the data
-    const axiosResponse = res as AxiosResponse<Response>;
-    return axiosResponse.data;
+   return res
 };
 
 export default getDocumentAPI;

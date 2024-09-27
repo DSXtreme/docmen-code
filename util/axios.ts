@@ -21,6 +21,7 @@ export const axiosPost = async <T>({ url, token, data, headers }: Params): Promi
                       Authorization: `Bearer ${token}`,
                   },
         });
+        
     } catch (e) {
         console.log("error at url: ", url);
         console.log("error at axiosPost: ", e);

@@ -62,7 +62,7 @@ export const Input: FC<InputProps> = ({
                 disabled={disabled}
                 css={css}
             />
-            {error && <p className="error">Input filed can't be empty!</p>}
+            {error}
         </div>
     )
 }
@@ -96,7 +96,7 @@ export const TextArea: FC<InputProps> = ({
                 style={{width: "100%", ...style}}
                 css={input}
             />
-            {error && <p className="error">Input filed can't be empty!</p>}
+            {error}
         </div>
     )
 }
@@ -126,7 +126,7 @@ export const FileInput: FC<FileInputProps> = ({
                 onChange={onChange}
                 disabled={disabled}
             />
-            {error && <p className="error">Input filed can't be empty!</p>}
+            {error}
         </div>
     )
 }
