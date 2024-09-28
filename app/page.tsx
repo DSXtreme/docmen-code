@@ -22,6 +22,7 @@ export default function Home() {
     // local state
     const [input, setInput] = useState<string>("");
     const [markdown, setMarkdown] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     // Initializeing code heighlighter
     useEffect(() => {
@@ -53,11 +54,15 @@ export default function Home() {
             // console.log("res: ", res);
             // setMarkdown(res.data.markdown_data);
 
+            setIsLoading(true);
+
             const res = await getDocumentAPI({ markdownInput: input });
 
             const data = res.data;
 
             setMarkdown(data.markdown_data);
+
+            setIsLoading(false);
         }
     };
 
@@ -78,18 +83,28 @@ export default function Home() {
                     </div>
                 </div>
                 <div css={rght_pannel}>
-                    {/* <div css={loading_container}>
-                    <Loading />
-                </div> */}
-                    <Markdown
-                        components={{
-                            code({ children }) {
-                                return <code css={code_block}>{children}</code>;
-                            },
-                        }}
-                    >
-                        {markdown}
-                    </Markdown>
+                    {/* Hint */}
+                    {isLoading ? (
+                        <div css={right_panel}>
+                            <Loading />
+                        </div>
+                    ) : !markdown ? (
+                        <div css={right_panel}>
+                            Paste your code to generate.
+                        </div>
+                    ) : (
+                        <Markdown
+                            components={{
+                                code({ children }) {
+                                    return (
+                                        <code css={code_block}>{children}</code>
+                                    );
+                                },
+                            }}
+                        >
+                            {markdown}
+                        </Markdown>
+                    )}
                 </div>
             </div>
         )
@@ -122,12 +137,15 @@ const rght_pannel = css`
         margin-left: 2rem;
     }
 `;
-const loading_container = css`
+const right_panel = css`
     width: 100%;
     height: calc(100vh - 45px - 2rem);
+    /* background: red; */
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.5rem;
+    color: var(--color-surface-300);
 `;
 const code_block = css`
     background: #222222ff;
