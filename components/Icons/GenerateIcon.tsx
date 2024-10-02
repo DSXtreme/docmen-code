@@ -2,7 +2,7 @@ import React, { CSSProperties, FC } from 'react'
 
 type Props = {
   width: string | number,
-  style: CSSProperties,
+  style?: CSSProperties,
 }
 
 const GenerateIcon: FC<Props> = (props) => {

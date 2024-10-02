@@ -82,7 +82,8 @@ a {
 
 /* Code section */
 
-code{
-  background: red;
-  color: "yellow"
+
+pre{
+  background: #222222ff !important;
+  border-radius: .5rem;
 }

@@ -26,6 +26,7 @@ const layout_container = css`
         position: fixed;
         top: 0;
         left: 0;
+        z-index: 500;
     }
     main {
         width: 100%;

@@ -7,10 +7,11 @@ import {motion} from "framer-motion"
 
 
 type Prop = {
-  onClick?: () => void
+  onClick?: () => void,
+  children: JSX.Element
 } 
 
-const GenerateButton:FC<Prop> = ({onClick=()=>{}}) => {
+const GenerateButton:FC<Prop> = ({onClick=()=>{}, children}) => {
   return (
     <motion.div 
       css={container} 
@@ -21,7 +22,8 @@ const GenerateButton:FC<Prop> = ({onClick=()=>{}}) => {
         cursor:"pointer"
       }}
     >
-      <GenerateIcon width={22} style={{fill: "#565555fff"}} /> 
+      {/* <GenerateIcon width={22} style={{fill: "#565555fff"}} />  */}
+      {children}
     </motion.div>
   )
 }
