@@ -6,7 +6,7 @@ type Parameters = {
 };
 
 const getDocumentAPI = async ({
-    markdownInput,
+    markdownInput
 }: Parameters) => {
     console.log("generating");
 

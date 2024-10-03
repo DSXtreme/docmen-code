@@ -55,13 +55,8 @@ export default function Home() {
         if (input) {
             setIsLoading(true);
             console.log("generating...");
-            const res = await axios.post(
-                "http://localhost:3001/document/generate",
-                {
-                    code: input,
-                }
-            );
-            console.log("res: ", res);
+            
+            const res = await getDocumentAPI({markdownInput: input})
             setMarkdown(res.data.markdown_data);
 
             const data = res.data;
