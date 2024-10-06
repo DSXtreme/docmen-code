@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         type: "website",
         images: [
             {
-                url: "/logo_d_code.png",
+                url: "/favicon.ico",
                 width: 800,
                 height: 600,
                 alt: "Docmen Code - AI Code Documentation Generator",
